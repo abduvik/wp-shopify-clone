@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  wordpress:
+    image: wordpress:6.0.0-php8.0
+    restart: always
+    ports:
+      - "3000:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp_db_user
+      WORDPRESS_DB_PASSWORD: wp_db_pass
+      WORDPRESS_DB_NAME: wp_db
+    volumes:
+      - ./dist/plugins:/var/www/html/wp-content/plugins
+      - ./dist/themes:/var/www/html/wp-content/themes
+
+  db:
+    image: mysql:5.7
+    platform: linux/amd64
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: wp_db_user
+      MYSQL_PASSWORD: wp_db_pass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./.db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:

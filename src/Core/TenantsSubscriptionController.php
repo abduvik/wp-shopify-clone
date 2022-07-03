@@ -18,8 +18,8 @@ class TenantsSubscriptionController
 
         add_action('wps_sfw_after_created_subscription', [$this, 'create_tenant_when_subscription_created'], 10, 2);
 
-        add_action('wps_sfw_subscription_cancel', [$this, 'remove_tenant_when_subscription_expired']);
-        // add_action('wps_sfw_expire_subscription_scheduler', [$this, 'remove_tenant_when_subscription_expired']);
+//        add_action('wps_sfw_subscription_cancel', [$this, 'remove_tenant_when_subscription_expired']);
+        add_action('wps_sfw_expire_subscription_scheduler', [$this, 'remove_tenant_when_subscription_expired']);
     }
 
     public function render_wpcs_checkout_fields($fields)
@@ -67,7 +67,7 @@ class TenantsSubscriptionController
 
         $tenant = $tenant[0];
 
-        wp_mail( $order->get_billing_email(), 'Your website is being created', "
+        wp_mail($order->get_billing_email(), 'Your website is being created', "
         <!doctype html>
         <html lang='en'>
         <body>

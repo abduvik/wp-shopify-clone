@@ -10,7 +10,7 @@ class TenantsSubscriptionController
 {
     public const WPCS_WEBSITE_NAME = 'WPCS_WEBSITE_NAME';
 
-    public function __construct(TenantsService $tenantsService)
+    public function __construct()
     {
         add_filter('woocommerce_checkout_fields', [$this, 'render_wpcs_checkout_fields']);
         add_action('woocommerce_checkout_update_order_meta', [$this, 'add_wpcs_checkout_fields']);

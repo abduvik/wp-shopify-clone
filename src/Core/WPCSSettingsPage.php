@@ -2,19 +2,12 @@
 
 namespace WPCSWooSubscriptions\Core;
 
-use WPCS\API\CreateTenantRequest;
-
-class AdminUI
+class WPCSSettingsPage
 {
-    public const WPCS_PRODUCT_VERSION = 'WPCS_PRODUCT_VERSION';
-
-    public function __construct(VersionsService $productsService)
+    public function __construct()
     {
         add_action('admin_menu', [$this, 'add_wpcs_admin_page'], 11);
         add_action('admin_init', [$this, 'add_wpcs_admin_settings']);
-
-        add_action('add_meta_boxes', [$this, 'create_woocommerce_wpcs_versions_selector']);
-        add_action('save_post', [$this, 'save_woocommerce_wpcs_versions_selector']);
     }
 
     public function add_wpcs_admin_page()
@@ -88,54 +81,6 @@ class AdminUI
     function render_settings_field($args)
     {
         echo "<input type='{$args["type"]}' id'{$args["id"]}' name='{$args["id"]}' value=" . get_option($args["id"]) . ">";
-    }
-
-    public function create_woocommerce_wpcs_versions_selector()
-    {
-        add_meta_box(
-            'wpcs_product_version_selector',
-            'WPCS Version Selector',
-            [$this, 'render_woocommerce_wpcs_versions_selector'],
-            'product',
-            'side',
-            'high'
-        );
-    }
-
-    public function render_woocommerce_wpcs_versions_selector($post)
-    {
-        $response = wp_remote_get('https://api.' . WPCS_API_REGION .'.wpcs.io/v1/versions', [
-            'headers' => [
-                'Authorization' => "Basic " . base64_encode(WPCS_API_KEY . ":" . WPCS_API_SECRET),
-            ]
-        ]);
-
-        $versions = json_decode($response['body']);
-
-        $available_versions = array_filter($versions, function ($version) {
-            return $version->statusName === 'Done';
-        });
-
-        $current_version = get_post_meta($post->ID, AdminUI::WPCS_PRODUCT_VERSION, true);
-
-        echo '<label for="wporg_field">WPCS Version</label>';
-        echo "<select name=" . AdminUi::WPCS_PRODUCT_VERSION . " class='postbox'>";
-        foreach ($available_versions as $version) {
-            echo selected($version->name, $current_version);
-            echo "<option " . selected($version->id, $current_version) . "value='$version->id'>$version->name</option>";
-        }
-        echo '</select>';
-    }
-
-    public function save_woocommerce_wpcs_versions_selector($post_id)
-    {
-        if (array_key_exists(AdminUI::WPCS_PRODUCT_VERSION, $_POST) && $_POST['post_type'] === 'product') {
-            update_post_meta(
-                $post_id,
-                AdminUI::WPCS_PRODUCT_VERSION,
-                $_POST[AdminUI::WPCS_PRODUCT_VERSION]
-            );
-        }
     }
 }
 

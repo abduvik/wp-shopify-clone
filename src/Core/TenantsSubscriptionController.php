@@ -41,11 +41,13 @@ class TenantsSubscriptionController
     public function create_tenant_when_subscription_created($subscription_id, $order_id)
     {
         $order = new \WC_Order($order_id);
+        $product = reset($order->get_items());
+        $wpcs_version_id = get_post_meta($product->get_product_id(), WooCommerceMetaBoxes::WPCS_PRODUCT_VERSION, true);
         $websiteName = get_post_meta($order_id, TenantsSubscriptionController::WPCS_WEBSITE_NAME, true);
         $password = wp_generate_password();
 
         $response = (new CreateTenantRequest())
-            ->setVersionId('9bcf5274-ac7e-4c22-8c38-f27918910a49')
+            ->setVersionId($wpcs_version_id)
             ->setTenantName($order->get_formatted_billing_full_name())
             ->setTenantEmail($order->get_billing_email())
             ->setTenantPassword($password)

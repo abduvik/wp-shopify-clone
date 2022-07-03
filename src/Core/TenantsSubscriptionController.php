@@ -68,14 +68,17 @@ class TenantsSubscriptionController
         $tenant = $tenant[0];
 
         wp_mail( $order->get_billing_email(), 'Your website is being created', "
-        <div>
-        <p>Hello,</p>
-        <p>You can now login here to your new website</p>
-        <p><strong>Admin Url</strong>: <a href='https://{$tenant->domainName}/wp-admin'>https://{$tenant->domainName}/wp-admin</a></p>
-        <p><strong>Email</strong> : {$order->get_billing_email()}</p>
-        <p><strong>Password</strong> : {$password}</p>
-        </div>
-        ");
+        <!doctype html>
+        <html lang='en'>
+        <body>
+            <p>Hello,</p>
+            <p>You can now login here to your new website</p>
+            <p><strong>Admin Url</strong>: <a href='https://{$tenant->domainName}/wp-admin'>https://{$tenant->domainName}/wp-admin</a></p>
+            <p><strong>Email</strong> : {$order->get_billing_email()}</p>
+            <p><strong>Password</strong> : {$password}</p>
+        </body>
+        </html>
+        ", ['Content-Type: text/html; charset=UTF-8']);
     }
 
     public function remove_tenant_when_subscription_expired($subscription_id)

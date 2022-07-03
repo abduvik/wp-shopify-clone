@@ -1,4 +1,11 @@
 <?php
+require_once 'vendor/autoload.php';
+
+use WPCSWooSubscriptions\Core\AdminUI;
+use WPCSWooSubscriptions\Core\VersionsService;
+use WPCSWooSubscriptions\Core\TenantsService;
+use WPCSWooSubscriptions\Core\TenantsSubscriptionController;
+
 /**
  * @package WPCSWooSubscriptions
  * @version 1.0.0
@@ -11,3 +18,13 @@ Author: Abdu Tawfik
 Version: 1.0.0
 Author URI: https://www.abdu.dev
 */
+
+define('WPCS_API_REGION', get_option('wpcs_credentials_region_setting')); // Or eu1, depending on your region.
+define('WPCS_API_KEY', get_option('wpcs_credentials_api_key_setting')); // The API Key you retrieved from the console
+define('WPCS_API_SECRET', get_option('wpcs_credentials_api_secret_setting')); // The API Secret you retrieved from the console
+
+$productsService = new VersionsService();
+$tenantsService = new TenantsService();
+
+new TenantsSubscriptionController($tenantsService);
+new AdminUI($productsService);

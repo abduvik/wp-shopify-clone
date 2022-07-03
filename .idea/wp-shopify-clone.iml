@@ -2,7 +2,19 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/dist/plugins/wpcs-woo-subscriptions" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/wpcs/php-api-wrapper" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/src/vendor/guzzlehttp/guzzle" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

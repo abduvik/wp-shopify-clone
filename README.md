@@ -7,4 +7,4 @@ Start Docker compose
 
 Create symlink
 
-`ln -s "$(pwd)/src/" dist/plugins/wpcs-woo-subscriptions`
+`fswatch -o src | xargs -n1 -I{} rsync -a src/ dist/plugins/wpcs-woo-subscriptions`

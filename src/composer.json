@@ -1,0 +1,18 @@
+{
+    "name": "abduvik/wpcs-woo-subscriptions",
+    "description": "WooCommerce plugin is used to create tenants on WPCS.io with support of WordPress, WooCommerce and Subscriptions for WooCommerce",
+    "autoload": {
+        "psr-4": {
+            "WPCSWooSubscriptions\\Core\\": "Core/"
+        }
+    },
+    "authors": [
+        {
+            "name": "abduvik",
+            "email": "contact@abdu.dev"
+        }
+    ],
+    "require": {
+        "wpcs/php-api-wrapper": "^1.0"
+    }
+}

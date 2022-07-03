@@ -1,10 +1,26 @@
-# wp-shopify-clone
-Shopify-Clone SaaS using WordPress and WPCS.io
+# Shopify SaaS Clone using WordPress, WooCommerce, WPCS & k8s
 
-Start Docker compose
+This is a Shopify Clone build using various technologies to illustrate how easy it is to build SaaS products using WordPress
 
-`docker-compose up`
+## YouTube Video
 
-Create symlink
+[![Shopify SaaS Clone using WordPress, WooCommerce, WPCS & k8s](http://img.youtube.com/vi/shEh0-P7pz0/0.jpg)](http://www.youtube.com/watch?v=shEh0-P7pz0 "Shopify SaaS Clone using WordPress, WooCommerce, WPCS & k8s")
 
-`fswatch -o src | xargs -n1 -I{} rsync -a src/ dist/plugins/wpcs-woo-subscriptions`
+## Local Development
+
+### Required tools
+
+- Docker and Docker-Compose
+- Composer
+- `fswarch` & `rsync`
+
+### Steps
+
+- `git clone` the project
+- Run `composer install` inside `src` directory
+- Create `.db` & `dist` directory in the root
+- Run `docker-compose up`
+- Run the following command to sync files between src and dist
+
+```fswatch -o src | xargs -n1 -I{} rsync -a src/ dist/plugins/wpcs-woo-subscriptions```
+
